@@ -1,5 +1,10 @@
-<h1>Show selected article</h1>
-<h2>Title: <%= @article.title %></h2>
-<p>Description: <%= @article.description %></p>
-<%= link_to "Back to article list", articles_path %> |
-<%= link_to "Edit article", edit_article_path(@article) %>
+<h2 class="text-center">Title: <%= @article.title %></h2>
+<div class="well well-lg description">
+  <h3 class="text-center">Description:</h3>
+  <hr>
+  <p><%= @article.description %></p>
+  <hr>
+  <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>
+  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  <%= link_to "Back", articles_path, class: "btn btn-success" %>
+</div>
