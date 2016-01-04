@@ -1,15 +1,11 @@
 <h1 class="text-center">Listing all articles</h1>
-<% @articles.each do |article| %>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="well well-lg list-description">
-      <h4 class="text-center"><%= link_to article.title, article_path(article) %></h4>
-      <hr>
-      <p><%=truncate(article.description, length: 100) %></p>
-      <hr>
-      <%= link_to "Edit", edit_article_path(article), class: "btn btn-primary" %>
-      <%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-    </div>
-  </div>
+
+<div class="text-center">
+  <%= will_paginate %>
 </div>
-<% end %>
+
+<%= render "article", obj: @articles %>
+
+<div class="text-center">
+  <%= will_paginate %>
+</div>

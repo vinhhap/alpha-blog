@@ -1,10 +1,23 @@
 <h2 class="text-center">Title: <%= @article.title %></h2>
 <div class="well well-lg description">
+  <% if @article.user %>
+    <div class="row">
+      <h3 class="text-center">Created by:</h3>
+      <p class="text-center"><%= link_to gravatar_for(@article.user), user_path(@article.user) %></p>
+      <h4 class="text-center"><%= link_to @article.user.username, user_path(@article.user) %></h4>
+    </div>
+  <% end %>
   <h3 class="text-center">Description:</h3>
   <hr>
   <p><%= @article.description %></p>
-  <hr>
-  <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>
-  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-  <%= link_to "Back", articles_path, class: "btn btn-success" %>
+  <small><i> Created:
+  <%= time_ago_in_words(@article.created_at) %> ago,
+  last updated: <%= time_ago_in_words(@article.updated_at) %> ago.</i>
+  </small>
+  <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
+    <hr>
+    <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>
+    <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to "Back", articles_path, class: "btn btn-success" %>
+  <% end %>
 </div>
