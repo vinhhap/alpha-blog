@@ -1,0 +1,15 @@
+<h1 class="text-center">Listing articles</h1>
+<div class="text-center">
+  <%= will_paginate %>
+  <% @categories.each do |category| %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="well list-description">
+          <h4 class="text-center"><%= link_to category.name, category_path(category) %></h4>
+          <p><%= pluralize(category.articles.count, 'category') %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= will_paginate %>
+</div>
